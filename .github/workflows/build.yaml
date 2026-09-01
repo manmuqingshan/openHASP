@@ -37,7 +37,7 @@ jobs:
           - out: globalsecurity
             env: gs-t3e_16MB
           - out: guition
-            env: esp32-s3-4848s040_16MB -e guition-jc4827w543c_4MB -e guition-jc8048w50n_16MB
+            env: esp32-s3-4848s040_16MB -e guition-jc4827w543c_4MB -e guition-jc8048w50n_16MB -e guition-jc2432w328_4MB
           - out: lanbon
             env: lanbon_l8 -e lanbon_l9_v1_0 -e lanbon_l9_v3_3
           - out: lilygo-ttgo

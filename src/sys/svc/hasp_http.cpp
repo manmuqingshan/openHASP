@@ -1582,7 +1582,7 @@ static void http_handle_gui()
     httpGpio += getOption(-1, "None");
 #if defined(ARDUINO_ARCH_ESP32)
     char buffer[10];
-    for(uint8_t gpio = 0; gpio < NUM_DIGITAL_PINS; gpio++) {
+    for(uint8_t gpio = 0; gpio < HASP_GPIO_PIN_COUNT; gpio++) {
         if(!gpioIsSystemPin(gpio)) {
             snprintf_P(buffer, sizeof(buffer), PSTR("GPIO %d"), gpio);
             httpGpio += getOption(gpio, buffer);
@@ -1789,7 +1789,7 @@ static void webHandleGpioConfig()
         httpMessage += F("<table><tr><th>" D_GPIO_PIN "</th><th>Type</th><th>" D_GPIO_GROUP
                          "</th><th>Default</th><th>Action</th></tr>");
 
-        for(uint8_t gpio = 0; gpio < NUM_DIGITAL_PINS; gpio++) {
+        for(uint8_t gpio = 0; gpio < HASP_GPIO_PIN_COUNT; gpio++) {
             for(uint8_t id = 0; id < HASP_NUM_GPIO_CONFIG; id++) {
                 hasp_gpio_config_t conf = gpioGetPinConfig(id);
                 if((conf.pin == gpio) && gpioConfigInUse(id) && !gpioIsSystemPin(gpio)) {
@@ -1963,7 +1963,7 @@ static void webHandleGpioOutput()
         httpMessage += F("<p><b>" D_GPIO_PIN "</b> <select id='pin' name='pin'>");
         hasp_gpio_config_t conf = gpioGetPinConfig(config_id);
 
-        for(uint8_t io = 0; io < NUM_DIGITAL_PINS; io++) {
+        for(uint8_t io = 0; io < HASP_GPIO_PIN_COUNT; io++) {
             if(((conf.pin == io) || !gpioInUse(io)) && !gpioIsSystemPin(io)) {
                 httpMessage += getOption(io, haspDevice.gpio_name(io).c_str(), conf.pin);
             }
@@ -2043,7 +2043,7 @@ static void webHandleGpioInput()
         httpMessage += F("<p><b>" D_GPIO_PIN "</b> <select id='pin' name='pin'>");
         hasp_gpio_config_t conf = gpioGetPinConfig(config_id);
 
-        for(uint8_t io = 0; io < NUM_DIGITAL_PINS; io++) {
+        for(uint8_t io = 0; io < HASP_GPIO_PIN_COUNT; io++) {
             if(((conf.pin == io) || !gpioInUse(io)) && !gpioIsSystemPin(io)) {
                 httpMessage += getOption(io, haspDevice.gpio_name(io).c_str(), conf.pin);
             }

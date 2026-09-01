@@ -346,6 +346,7 @@ void guiSetup()
     lv_obj_t* mouse_layer = lv_disp_get_layer_sys(NULL); // default display
 
 #if defined(ARDUINO_ARCH_ESP32)
+#if TOUCH_DRIVER != -1
     Preferences preferences;
     nvs_user_begin(preferences, "gui", true);
     // indev_drv.drag_limit           = preferences.getUChar(key, LV_INDEV_DEF_DRAG_LIMIT);
@@ -355,6 +356,7 @@ void guiSetup()
     // indev_drv.gesture_limit        = preferences.getUChar(key, LV_INDEV_DEF_GESTURE_LIMIT);
     // indev_drv.gesture_min_velocity = preferences.getUChar(key, LV_INDEV_DEF_GESTURE_MIN_VELOCITY);
     preferences.end();
+#endif
 
     LV_IMG_DECLARE(mouse_cursor_icon);          /*Declare the image file.*/
     cursor = lv_img_create(mouse_layer, NULL);  /*Create an image object for the cursor */

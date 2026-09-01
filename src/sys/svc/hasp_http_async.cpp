@@ -1462,7 +1462,7 @@ void webHandleGpioConfig(AsyncWebServerRequest* request)
         httpMessage += F("<table><tr><th>" D_GPIO_PIN "</th><th>Type</th><th>" D_GPIO_GROUP
                          "</th><th>Default</th><th>Action</th></tr>");
 
-        for(uint8_t gpio = 0; gpio < NUM_DIGITAL_PINS; gpio++) {
+        for(uint8_t gpio = 0; gpio < HASP_GPIO_PIN_COUNT; gpio++) {
             for(uint8_t id = 0; id < HASP_NUM_GPIO_CONFIG; id++) {
                 hasp_gpio_config_t conf = gpioGetPinConfig(id);
                 if((conf.pin == gpio) && gpioConfigInUse(id) && gpioInUse(gpio) && !gpioIsSystemPin(gpio)) {
@@ -1643,7 +1643,7 @@ void webHandleGpioOutput(AsyncWebServerRequest* request)
     httpMessage += F("<p><b>" D_GPIO_PIN "</b> <select id='pin' name='pin'>");
     hasp_gpio_config_t conf = gpioGetPinConfig(config_id);
 
-    for(uint8_t io = 0; io < NUM_DIGITAL_PINS; io++) {
+    for(uint8_t io = 0; io < HASP_GPIO_PIN_COUNT; io++) {
         if(((conf.pin == io) || !gpioInUse(io)) && !gpioIsSystemPin(io)) {
             httpMessage += getOption(io, haspDevice.gpio_name(io).c_str(), conf.pin == io);
         }
@@ -1747,7 +1747,7 @@ void webHandleGpioInput(AsyncWebServerRequest* request)
         httpMessage += F("<p><b>" D_GPIO_PIN "</b> <select id='pin' name='pin'>");
         hasp_gpio_config_t conf = gpioGetPinConfig(config_id);
 
-        for(uint8_t io = 0; io < NUM_DIGITAL_PINS; io++) {
+        for(uint8_t io = 0; io < HASP_GPIO_PIN_COUNT; io++) {
             if(((conf.pin == io) || !gpioInUse(io)) && !gpioIsSystemPin(io)) {
                 httpMessage += getOption(io, haspDevice.gpio_name(io).c_str(), conf.pin == io);
             }
